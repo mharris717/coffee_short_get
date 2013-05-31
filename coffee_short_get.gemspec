@@ -20,9 +20,12 @@ Gem::Specification.new do |s|
     ".document",
     ".rspec",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
+    "VERSION",
+    "coffee_short_get.gemspec",
     "lib/coffee_short_get.rb",
     "spec/coffee_short_get_spec.rb",
     "spec/spec_helper.rb"
