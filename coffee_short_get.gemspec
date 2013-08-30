@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mike Harris"]
-  s.date = "2013-05-31"
+  s.date = "2013-08-30"
   s.description = "coffee_short_get"
   s.email = "mharris717@gmail.com"
   s.extra_rdoc_files = [
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/mharris717/coffee_short_get"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.23"
+  s.rubygems_version = "1.8.25"
   s.summary = "coffee_short_get"
 
   if s.respond_to? :specification_version then
