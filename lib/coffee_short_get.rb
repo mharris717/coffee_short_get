@@ -1,12 +1,6 @@
-class CoffeeGetAccess < Sprockets::Processor
-  def evaluate(context,locals)
-    body = data
-
-    if context.pathname.to_s =~ /coffee/
-      require 'pp'
-      pp context
-      pp locals
-      
+class CoffeeParse
+  class << self
+    def parse(body)
       body = body.gsub(/@\$(\w+)/) do |str| 
         var = str[2..-1]
         "@get('#{var}')"
@@ -15,22 +9,38 @@ class CoffeeGetAccess < Sprockets::Processor
         var = str[2..-1]
         ".get('#{var}')"
       end
+      body
     end
-    
-    body
   end
 end
 
-module CoffeePreExt
-  class << self
-    def registered(app)
-      puts "registered"
-      app.after_configuration do
-        sprockets.register_preprocessor 'application/javascript', CoffeeGetAccess
+if defined?(Sprockets)
+  class CoffeeGetAccess < Sprockets::Processor
+    def evaluate(context,locals)
+      body = data
+
+      if context.pathname.to_s =~ /coffee/      
+        body = CoffeeParse.parse(body)
       end
+      
+      body
     end
-    alias :included :registered
+
+    
+  end
+
+  module CoffeePreExt
+    class << self
+      def registered(app)
+        app.after_configuration do
+          sprockets.register_preprocessor 'application/javascript', CoffeeGetAccess
+        end
+      end
+      alias :included :registered
+    end
   end
 end
 
-::Middleman::Extensions.register :coffee_short_get, CoffeePreExt
+if defined?(Middleman)
+  ::Middleman::Extensions.register :coffee_short_get, CoffeePreExt
+end
