@@ -14,7 +14,7 @@ class CoffeeParse
   end
 end
 
-if defined?(Sprockets)
+if defined?(Sprockets) && defined?(Sprockets::Processor)
   class CoffeeGetAccess < Sprockets::Processor
     def evaluate(context,locals)
       body = data
